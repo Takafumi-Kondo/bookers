@@ -1,0 +1,44 @@
+<!-- 投稿一覧　新規投稿と同じページにする -コントロからの@posts-->
+<h1>Books</h1>
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Body</th>
+	</tr>
+	<tr>
+		<td>
+			<% @posts.each do |post| %>
+			<span><%= post.title %></span><br>
+			<% end %>
+		</td>
+
+		<td>
+			<% @posts.each do |post| %>
+			<span><%= post.body %></span><br>
+			<% end %>
+		</td>
+		<td>
+			<% @posts.each do |post| %>
+				<span>
+					<%= link_to "show", post_path(post.id) %><br>
+				</span>
+			<% end %>
+		</td>
+		<!-- 後で追加　 -->
+		<td>
+			<% @posts.each do |post| %>
+				<span>
+					<%= link_to "Edit", edit_post_path(post.id) %><br>
+				</span>
+			<% end %>
+		</td>
+
+		<td>
+			<% @posts.each do |post| %>
+				<span>
+					<%= link_to "destroy", post_path(post.id), method: :delete, "data-confirm" => "Are you sure？" %><br>
+				</span>
+			<% end %>
+		</td>
+	</tr>
+</table>
