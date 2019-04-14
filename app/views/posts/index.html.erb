@@ -1,4 +1,10 @@
 <!-- 投稿一覧　新規投稿と同じページにする -コントロからの@posts-->
+<% if flash[:notice] %>
+	<div class="flash">
+		<%= flash[:notice] %>
+	</div>
+ <% end %>
+
 <h1>Books</h1>
 <table>
 	<tr>
@@ -11,34 +17,45 @@
 			<span><%= post.title %></span><br>
 			<% end %>
 		</td>
-
 		<td>
 			<% @posts.each do |post| %>
 			<span><%= post.body %></span><br>
 			<% end %>
 		</td>
-		<td>
-			<% @posts.each do |post| %>
-				<span>
-					<%= link_to "show", post_path(post.id) %><br>
-				</span>
-			<% end %>
-		</td>
-		<!-- 後で追加　 -->
-		<td>
-			<% @posts.each do |post| %>
-				<span>
-					<%= link_to "Edit", edit_post_path(post.id) %><br>
-				</span>
-			<% end %>
-		</td>
 
 		<td>
 			<% @posts.each do |post| %>
 				<span>
-					<%= link_to "destroy", post_path(post.id), method: :delete, "data-confirm" => "Are you sure？" %><br>
+					<%= link_to "Show", post_path(post.id), class: "show_#{post.id}" %><br>
+				</span>
+			<% end %>
+		</td>
+		<td>
+			<% @posts.each do |post| %>
+				<span>
+					<%= link_to "Edit", edit_post_path(post.id), class: "edit_#{post.id}" %><br>
+				</span>
+			<% end %>
+		</td>
+		<td>
+			<% @posts.each do |post| %>
+				<span>
+					<%= link_to "Destroy", post_path(post.id), method: :delete, "data-confirm" => "Are you sure？", class: "destroy_#{post.id}" %><br>
 				</span>
 			<% end %>
 		</td>
 	</tr>
 </table>
+
+<h2>New book</h2>
+<!-- form_for(入力欄) -->
+<!-- 後で修正 -->
+<%= form_for(@post) do |f| %>
+	<p>Title</p>
+	<%= f.text_field :title, class: "book_title" %>
+
+	<p>Body</p>
+	<%= f.text_area :body, class: "book_body" %><br>
+
+	<%= f.submit 'Create Book' %>
+<% end %>

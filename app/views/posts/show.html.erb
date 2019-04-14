@@ -1,10 +1,14 @@
-<h4>"Title":<%= @post.title %></h4>
-<h4>本文:<%= @post.body %></h4>
+<% if flash[:notice] %>
+	<div class="flash">
+		<%= flash[:notice] %>
+	</div>
+ <% end %>
 
-<%= link_to "Edit", edit_post_path(@post.id) %>
+<p class="show-headline"><strong>Title:</strong><%= @post.title %></p>
+<p class="show-headline"><strong>Body:</strong><%= @post.body %></p>
 
-
-<%= link_to "Back", edit_post_path(@post.id) %>
-
-
-
+<p>
+<%= link_to "Edit", edit_post_path, class: "edit_#{@post.id}" %> |
+<%= link_to "Back", '/posts', class: "back" %>
+</p>
+<!-- indexでは@posts.each do post があるがここにはpostはなく@postなので edit_#{@post}  -->

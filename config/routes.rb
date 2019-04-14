@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+ # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	get 'posts/new'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	get 'top' => 'root#top'
-
+	root :to => "root#top"#railsページを自分のトップページに
 	post 'posts' => 'posts#create' #/postsというURLにpostでリク→postscontroのCreateアクション
 
 	get 'posts' => 'posts#index' #/postsでpostsコンのindexアクション
